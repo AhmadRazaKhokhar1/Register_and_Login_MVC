@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(49, 49, 49);
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    padding:15px 55px;
+    background: goldenrod;
+    width: 100vw;
+}
+ul li{
+    list-style: none;
+    color: white;
+}
+header{
+    width: 100vw !important;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 8px;
+    background: orange;
+}
+nav div, h1{
+    color: white;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 60vh;
+    box-shadow: 5px 5px 45px gray;
+    padding: 12px;
+    background: white;
+    margin: 85px 455px;
+    border-radius: 11px;
+}
+
+
+#login{
+    transition: 1s ease-in-out;
+    justify-content: space-evenly;
+    flex-flow:column-reverse;
+    transform: rotateZ(180deg);
+    display: none;
+    background: white;
+}
+#register{
+    transition: 1s ease-in-out;
+    justify-content: space-evenly;
+    transform: rotate(180deg);
+    display: none;
+    background: white !important;
+
+}
+
+
+
+.userInput{
+    padding: 12px;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0px 0px 55px gray;
+    margin: 5px 4px;
+    width: 270px;
+}
+.sub{
+    width: 300px;
+    background: orangered;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 12px;
+    box-shadow: 0px 0px 15px gray;
+    color: white;
+    font-weight: 800;
+}

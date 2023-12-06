@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>Registration Form</title>
+</head>
+<body>
+<main>
+
+
+    <header><nav>
+        <div><h1>Demo User Authentication</h1></div>
+        <div>A pure javascipt project by Ahmad Raza Khokhar</div>
+    </nav></header>
+
+    <div id="message"></div>
+        <form onsubmit="registeraUser(); return false;" class="form" id="register">
+              <input type="text" name="firstName" id="firstName" class="userInput" placeholder="Enter first name">
+              <input type="text" name="lastName" id="lastName" class="userInput" placeholder="Enter last name">
+              <input type="email" name="email" id="email1" class="userInput" placeholder="Enter email">
+              <input type="tel" name="phone" id="phone" class="userInput" placeholder="Enter phone number">
+              <input type="password1" name="password" id="password" class="userInput" placeholder="Enter password">
+
+              <input type="submit" value="Register" class="sub">
+        </form>
+        <br>
+        <form onsubmit="loginUser(); return false;" class="form" id='login'>
+            <div style="display: flex; flex-direction: column;">
+                <input type="email" name="email" id="email2" class="userInput" placeholder="Enter email">
+                <input type="password" name="password" id="password2" class="userInput" placeholder="Enter password">
+            </div>
+           
+            <input type="submit" value="Login" class="sub">
+      </form>
+    <div class="options">
+        <button class="btn-chan" onclick="loginAnimate()">
+            Go to Login 
+        </button>
+        <button class="btn-chan" onclick="registerAnimate()">
+            Go to Register 
+        </button>
+    </div>
+    <footer>
+        <div><h6>
+Copyright © 
+2024
+Demo User Authentication. All rights reserved by Ahmad Raza Khokhar.
+        </h6></div>
+        <div>
+            <ul>
+                <li>Facebook</li>
+                <li>Instagram</li>
+                <li>Github</li>
+                <li>LinkedIn</li>
+            </ul>
+        </div>
+    </footer>
+
+</main>
+
+<script src="./index.js"></script>
+</body>
+</html>
