@@ -43,7 +43,7 @@ nav div, h1{
     box-shadow: 5px 5px 45px gray;
     padding: 12px;
     background: white;
-    margin: 85px 455px;
+    margin: 135px;
     border-radius: 11px;
 }
 
@@ -51,20 +51,23 @@ nav div, h1{
 #login{
     transition: 1s ease-in-out;
     justify-content: space-evenly;
-    flex-flow:column-reverse;
-    transform: rotateZ(180deg);
-    display: none;
+    flex-flow:column;
+    transform: rotateY(360deg);
     background: white;
+    position: relative;
 }
 #register{
     transition: 1s ease-in-out;
     justify-content: space-evenly;
-    transform: rotate(180deg);
-    display: none;
+    transform: rotateX(360deg);
     background: white !important;
-
+    position: relative;
 }
-
+.flex{
+    display: flex;
+    width: 80vw;
+    justify-content: space-between;
+}
 
 
 .userInput{

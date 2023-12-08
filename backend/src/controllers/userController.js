@@ -40,8 +40,8 @@ login :async(req, res)=>{
         console.log(`The app is connected to the DataBase 🔥`)
 
         const userExists = await userModel.findOne({email:req.body.email});
-        const password = req.body.password;
-        const passConfirm = await bcrypt.compare(password, userExists.password);
+
+        const passConfirm = await bcrypt.compare(req.body.password, userExists.password);
         
         if(passConfirm&&userExists){
             const token = await userExists.generateToken();

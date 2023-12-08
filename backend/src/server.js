@@ -8,9 +8,10 @@ const port = process.env.PORT;
 const app = express()
 // cors authentication middleware
 var corsOptions = {
-    origin: 'http://127.0.0.1:5500/frontend/index.html',
+    origin: 'http://127.0.0.1:5500',
     optionsSuccessStatus: 200
   }
+  
 app.use(cors(corsOptions));
 app.use(express.json());
 
