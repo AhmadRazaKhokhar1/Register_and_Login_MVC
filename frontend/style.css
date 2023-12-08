@@ -47,7 +47,10 @@ nav div, h1{
     border-radius: 11px;
 }
 
-
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
 #login{
     transition: 1s ease-in-out;
     justify-content: space-evenly;
@@ -89,4 +92,35 @@ nav div, h1{
     box-shadow: 0px 0px 15px gray;
     color: white;
     font-weight: 800;
+}
+.getAllUsers{
+    color: white;
+    background:purple;
+    padding: 5px;
+    width: 400px;
+    display: block;
+    margin: auto;
+}
+.output{
+ width: 30vw;
+ box-shadow: 5px 5px 15px grey;
+ display: flex;
+ flex-direction: column;
+ margin: auto;
+ padding: 15px;
+ border-radius: 12px;
+}
+.output h1{
+    color: greenyellow;
+}
+.output p{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    text-align: left;
+}
+.output span{
+    text-align: right;
+    color: green;
 }

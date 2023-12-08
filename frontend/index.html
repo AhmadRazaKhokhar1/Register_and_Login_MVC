@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Registration Form</title>
 </head>
 <body>
@@ -14,27 +15,33 @@
         <div><h1>Demo User Authentication</h1></div>
         <div>A pure javascipt project by Ahmad Raza Khokhar</div>
     </nav></header>
-    <div id="message"></div>
-<div class="flex">
-    <form onsubmit="registerUser(); return false;" class="form" id="register">
-        <input type="text" name="firstName" id="firstName" class="userInput" placeholder="Enter first name">
-        <input type="text" name="lastName" id="lastName" class="userInput" placeholder="Enter last name">
-        <input type="email" name="email" id="email1" class="userInput" placeholder="Enter email">
-        <input type="tel" name="phone" id="phone" class="userInput" placeholder="Enter phone number">
-        <input type="password" name="password" id="password" class="userInput" placeholder="Enter password">
+    <div class="flex">
+        <form onsubmit="registerUser(); return false;" class="form" id="register">
+            <input type="text" name="firstName" id="firstName" class="userInput" placeholder="Enter first name">
+            <input type="text" name="lastName" id="lastName" class="userInput" placeholder="Enter last name">
+            <input type="email" name="email" id="email1" class="userInput" placeholder="Enter email">
+            <input type="tel" name="phone" id="phone" class="userInput" placeholder="Enter phone number">
+            <input type="password" name="password" id="password" class="userInput" placeholder="Enter password">
 
         <input type="submit" value="Register" class="sub">
   </form>
   <br>
   <form onsubmit="loginUser(); return false;" class="form" id='login'>
-      <div style="display: flex; flex-direction: column;">
-          <input type="email" name="email" id="email2" class="userInput" placeholder="Enter email">
-          <input type="password" name="password" id="password2" class="userInput" placeholder="Enter password">
-      </div>
-     
-      <input type="submit" value="Login" class="sub">
+    <div style="display: flex; flex-direction: column;">
+        <input type="email" name="email" id="email2" class="userInput" placeholder="Enter email">
+        <input type="password" name="password" id="password2" class="userInput" placeholder="Enter password">
+    </div>
+    
+    <input type="submit" value="Login" class="sub">
 </form>
+
+<div>
 </div>
+</div>
+<button onclick="getUser()" class="getAllUsers">Get all users</button>
+<br>
+<div id="message"></div>
+<br>
     <footer>
         <div><h6>
 Copyright © 
