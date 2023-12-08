@@ -52,7 +52,7 @@ login :async(req, res)=>{
 
     } catch (error) {
         console.log(`There was an error while logging in! : ${error}`);
-        res.status(500).json({error:'There was an internal serverERROR:500'});
+        res.status(500).json({errorMessage:'There was an internal serverERROR:500'});
     } finally{
         await userClient.close();
     }
