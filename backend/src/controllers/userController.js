@@ -48,6 +48,7 @@ login :async(req, res)=>{
             res.status(200).json({message:'User logged in successfully!', userDetails:userExists, token:token});
         }else if(!userExists){
             res.status(401).json({error:'Invalid credentials!'});
+
         }
         else{
             res.status(401).json({error:'Invalid credentials!'});
