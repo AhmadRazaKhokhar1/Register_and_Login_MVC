@@ -59,6 +59,10 @@ const fetchUrl = 'http://localhost:786/api/login'
 
   if(response.ok){
     alert(responseData.message)
+
+    localStorage.setItem('token', responseData.token);
+    console.log('token', responseData.token);
+
     console.log(responseData)
   }else{
     alert(responseData.error)
