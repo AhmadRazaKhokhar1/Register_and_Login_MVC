@@ -1,4 +1,4 @@
-const { connect } = require('http2');
+const {connect} = require('http2');
 const {MongoClient, ServerApiVersion} = require('mongodb');
 const mongoose = require('mongoose');
 const uri = process.env.MONGO_URI_TEST;
@@ -13,7 +13,7 @@ const userClient = new MongoClient(uri, {
 
 function run(){
     mongoose.connect(uri);
-    console.log(`Connected to Data Base! 🔥`)
+    console.log(`Connected to Data Base! 🔥`);
 }
 run()
 

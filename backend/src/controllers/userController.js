@@ -1,4 +1,4 @@
-const { useFormAction } = require('react-router-dom');
+const bcrypt = require('bcryptjs')
 const userClient = require('../Database/dataBase.js');
 const userModel = require('../models/userModel.js');
 
@@ -10,7 +10,7 @@ registration :async(req, res)=>{
        const userExists = await userModel.findOne({email:req.body.email});
 
        if(userExists){
-       return res.status(409).json({message:'User already exists!'});
+       return res.status(409).json({error:'User already exists!'});
          }
        
        const newData = new userModel({
@@ -22,13 +22,13 @@ registration :async(req, res)=>{
         password:req.body.password,
 
        });
-
+         const token = await newData.generateToken();
        const result = await newData.save()
-       res.status(201).json({message:'User registered successfully!', result:result});
+       res.status(201).json({message:'User registered successfully!', result:result, token:token});
         console.log('Success');
     } catch (error) {
         console.log(`There was an error in Registeration: ${error}`);
-        res.status(500).json({message:'There was an internal server <b>ERROR: 500</b>'});
+        res.status(500).json({error:'There was an internal server <b>ERROR: 500</b>'});
     } finally{
         await userClient.close();
     }
@@ -40,18 +40,19 @@ login :async(req, res)=>{
         console.log(`The app is connected to the DataBase 🔥`)
 
         const userExists = await userModel.findOne({email:req.body.email});
-
         const password = req.body.password;
-        if(userExists && password == userExists.password){
-            res.status(200).json({message:'User logged in successfully!'});
+        const passConfirm = await bcrypt.compare(password, userExists.password);
+        
+        if(passConfirm&&userExists){
+            const token = await userExists.generateToken();
+            res.status(200).json({message:'User logged in successfully!', userDetails:userExists, token:token});
         }else{
-            res.status(401).json({message:'Invalid credentials!', userDetails:userExists});
-
+            res.status(401).json({error:'Invalid credentials!'});
         }
 
     } catch (error) {
         console.log(`There was an error while logging in! : ${error}`);
-        res.status(500).json({message:'There was an internal server <b>ERROR: 500</b>'});
+        res.status(500).json({error:'There was an internal serverERROR:500'});
     } finally{
         await userClient.close();
     }
@@ -64,7 +65,7 @@ login :async(req, res)=>{
         res.status(200).json({dataFetched:dataFetched});
     } catch (error) {
         console.log(`There was an error in Fetching Data: ${error}`);
-        res.status(500).json({message:'There was an internal server <b>ERROR: 500</b>'});
+        res.status(500).json({error:'There was an internal server <b>ERROR: 500</b>'});
     } finally{
         userClient.close();
     }
@@ -79,7 +80,7 @@ login :async(req, res)=>{
         res.status(302).json({userData:userData})
      } catch (error) {
         console.log(`There was as an internal server error ${error}`);
-        res.status(500).json({message:"Internal Server Error"})
+        res.status(500).json({error:"Internal Server Error"})
      }
   },
   // update user by his id and $set to change his info || Put or Patch and even Post Method can be used but PUT is preferred
@@ -93,11 +94,11 @@ login :async(req, res)=>{
             res.status(404).json({message:"User not found!"});
         }
         else{
-            res.status(302).json({message:"Updated successfully", userData})
+            res.status(302).json({error:"Updated successfully", userData})
         }
     } catch (error) {
         console.log(`There is an error at ${error}`);
-        res.status(500).json({message:"Internal Server Error"});
+        res.status(500).json({error:"Internal Server Error"});
     }
 },
 // delete user by targeting his unique id and DELETE Method
@@ -107,13 +108,13 @@ deleteUser:async(req, res)=>{
         const userId = req.params.id;
         const userDeleted = await userModel.findOneAndDelete({_id:userId});
         if(userDeleted){
-            res.status(204).json({message:"User Deleted successfully!", userDeleted:userDeleted})
+            res.status(200).json({message:"User Deleted successfully!", userDeleted:userDeleted})
         }else{
-            res.status(404).json({message:"User not found!"});
+            res.status(404).json({error:"User not found!"});
         }
     }catch(error){
         console.log('There was an error:'+ error);
-        res.status(500).json({message:"There was an internal server error."})
+        res.status(500).json({error:"There was an internal server error."})
     }
   }
 
