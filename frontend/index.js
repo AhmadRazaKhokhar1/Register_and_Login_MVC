@@ -46,7 +46,7 @@ const loginUser = async ()=>{
 try {
     const email=  document.getElementById('email2').value;
     const password = document.getElementById('password2').value;
-const loginData = {email, password}
+    const loginData = {email, password}
 
 const fetchUrl = 'http://localhost:786/api/login'
 
@@ -64,8 +64,8 @@ const fetchUrl = 'http://localhost:786/api/login'
   if(response.ok){
     alert(responseData.message)
 
-    localStorage.setItem('token', responseData.token);
-    console.log('token', responseData.token);
+   const storedToken = localStorage.setItem('token', responseData.token);
+    console.log({storedToken});
 
     console.log(responseData)
   }else{

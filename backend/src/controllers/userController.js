@@ -34,30 +34,36 @@ registration :async(req, res)=>{
     }
 },
 //login mehtod or POST method 
-login :async(req, res)=>{
+login : async (req, res)=>{
     try {
         await userClient.connect();
         console.log(`The app is connected to the DataBase 🔥`)
 
         const userExists = await userModel.findOne({email:req.body.email});
-
-        const passConfirm = await bcrypt.compare(req.body.password, userExists.password);
-        
-        if(passConfirm&&userExists){
+         if (userExists){
+         const passConfirm = await bcrypt.compare(req.body.password, userExists.password);
+            if(passConfirm){
             const token = await userExists.generateToken();
-            res.status(200).json({message:'User logged in successfully!', userDetails:userExists, token:token});
-        }else if(!userExists){
-            res.status(401).json({error:'Invalid credentials!'});
 
+            res.status(200).json({
+                message:"User logged in successfully!",
+                 token:token, id:userExists._id,
+                  email: userExists.email
+                });
+              
+            }
+            else{
+                res.status(401).json({msg:"Invalid Credentials"})
+            }
         }
-        else{
-            res.status(401).json({error:'Invalid credentials!'});
-        }
-
+         if(!userExists){
+             res.status(401).json({message:"Invalid credentials"})
+            }
     } catch (error) {
         console.log(`There was an error while logging in! : ${error}`);
-        res.status(500).json({errorMessage:'There was an internal serverERROR:500'});
-    } finally{
+        res.status(500).json({error:'There was an internal serverERROR:500'});
+    } 
+    finally{
         await userClient.close();
     }
 },
