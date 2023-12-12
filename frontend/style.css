@@ -13,9 +13,10 @@ main{
 footer{
     display: flex;
     justify-content: space-between;
-    padding:15px 55px;
+    padding:1px 5px;
     background: goldenrod;
     width: 100vw;
+    margin: 0;
 }
 ul li{
     list-style: none;

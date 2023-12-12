@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,19 +17,19 @@
     </nav></header>
     <div class="flex">
         <form onsubmit="registerUser(); return false;" class="form" id="register">
-            <input type="text" name="firstName" id="firstName" class="userInput" placeholder="Enter first name">
-            <input type="text" name="lastName" id="lastName" class="userInput" placeholder="Enter last name">
-            <input type="email" name="email" id="email1" class="userInput" placeholder="Enter email">
-            <input type="tel" name="phone" id="phone" class="userInput" placeholder="Enter phone number">
-            <input type="password" name="password" id="password" class="userInput" placeholder="Enter password">
+            <input type="text" name="firstName" id="firstName" class="userInput" placeholder="Enter first name" autocomplete="on" required>
+            <input type="text" name="lastName" id="lastName" class="userInput" placeholder="Enter last name" autocomplete="on" required>
+            <input type="email" name="email" id="email1" class="userInput" placeholder="Enter email" autocomplete="on" required>
+            <input type="tel" name="phone" id="phone" class="userInput" placeholder="Enter phone number" autocomplete="on" required>
+            <input type="password" name="password" id="password" class="userInput" placeholder="Enter password" required>
 
         <input type="submit" value="Register" class="sub">
   </form>
   <br>
   <form onsubmit="loginUser(); return false;" class="form" id='login'>
     <div style="display: flex; flex-direction: column;">
-        <input type="email" name="email" id="email2" class="userInput" placeholder="Enter email">
-        <input type="password" name="password" id="password2" class="userInput" placeholder="Enter password">
+        <input type="email" name="email" id="email2" class="userInput" placeholder="Enter email" required>
+        <input type="password" name="password" id="password2" class="userInput" placeholder="Enter password" required>
     </div>
     
     <input type="submit" value="Login" class="sub">
@@ -38,7 +38,14 @@
 <div>
 </div>
 </div>
-<button onclick="getUser()" class="getAllUsers">Get all users</button>
+<br>
+<form onsubmit="getUserById(); return false">
+    <input type="text" id="id" required autocomplete="on" required class="userInput" placeholder="Enter Id to get"  style="display: block; margin: auto; "><br>
+    <button type="submit" class="getAllUsers">Get user by id </button>
+</form>
+<br>
+<button onclick="getUser(); return false" class="getAllUsers">Get all users</button>
+
 <br>
 <div id="message"></div>
 <br>
@@ -48,18 +55,11 @@ Copyright ©
 2024
 Demo User Authentication. All rights reserved by Ahmad Raza Khokhar.
         </h6></div>
-        <div>
-            <ul>
-                <li>Facebook</li>
-                <li>Instagram</li>
-                <li>Github</li>
-                <li>LinkedIn</li>
-            </ul>
-        </div>
     </footer>
 
 </main>
 
-<script src="./index.js"></script>
+<!-- <script src="./index.js"></script> -->
+<script src="index2.js"></script>
 </body>
 </html>

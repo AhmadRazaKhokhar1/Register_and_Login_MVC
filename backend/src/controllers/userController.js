@@ -10,7 +10,8 @@ registration :async(req, res)=>{
        const userExists = await userModel.findOne({email:req.body.email});
 
        if(userExists){
-       return res.status(409).json({error:'User already exists!'});
+         res.status(409).json({message:'User already exists!'});
+         return;
          }
        
        const newData = new userModel({
@@ -24,11 +25,11 @@ registration :async(req, res)=>{
        });
          const token = await newData.generateToken();
        const result = await newData.save()
-       res.status(201).json({message:'User registered successfully!', result:result, token:token});
-        console.log('Success');
+       console.log('Success');
+       return res.status(201).json({message:'User registered successfully!', result:result, token:token});
     } catch (error) {
         console.log(`There was an error in Registeration: ${error}`);
-        res.status(500).json({error:'There was an internal server <b>ERROR: 500</b>'});
+       return res.status(500).json({error:'There was an internal server ERROR: 500'});
     } finally{
         await userClient.close();
     }
@@ -48,7 +49,7 @@ login : async (req, res)=>{
             res.status(200).json({
                 message:"User logged in successfully!",
                  token:token, id:userExists._id,
-                  email: userExists.email
+                  userData: userExists
                 });
               
             }
