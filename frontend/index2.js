@@ -118,9 +118,9 @@ const getUser = async ()=> {
                 .then(function(){
                     console.log(response);
                      // Remove the deleted user from the displayed list
-                        const userElement = document.getElementById(`user_${id}`);
-                        if (userElement) {
-                            userElement.remove();
+                        const user = document.getElementById(`user_${id}`);
+                        if (user) {
+                            user.remove();
                             alert(response.message)
                         }
                 })
