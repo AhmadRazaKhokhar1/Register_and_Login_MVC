@@ -125,3 +125,6 @@ nav div, h1{
     text-align: right;
     color: green;
 }
+.update{
+    background: red;
+}

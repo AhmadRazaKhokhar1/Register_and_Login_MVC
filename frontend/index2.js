@@ -104,6 +104,7 @@ const getUser = async ()=> {
           <button onclick="updateUser('${user._id}')" >Edit</button>
           </div>
           <br/>
+
           `
           document.getElementById('message').innerHTML += userDataFetched;
         });
@@ -112,6 +113,7 @@ const getUser = async ()=> {
       }
       
     }
+    //delete user by his id:
     async function deleteUser(id){
         let  response;
                 await axios.delete(`${baseUrl}/api/deleteuser/${id}`)
@@ -127,6 +129,38 @@ const getUser = async ()=> {
                 .catch(function(error){
                    console.log(`Error on Delete API: ${error}`);
                    alert(response.message)
-                })
+                });
+            }
+            
+            //update user by his id:
+            const updateUser = async (id)=>{
+                let response;
+                try {
+                    await axios.get(`${baseUrl}/api/updateuser/${id}`);
+                    if(response){
+                        const user = response.data;
+                        console.log(user)
+                        document.getElementById('update').innerHTML +=`
+                        <link href="style.css" rel="stylesheet" />
+                        <br/>
+                            <div class='update' id='user_${user._id}'>
+                            <h1>Make your changes</h1> <br/>
+                            <hr>
+                              <p><b>ID:</b><span>${user._id}</span></p><br/>
+                              <p><b>First Name:</b><span>${user.firstName}</span></p><br/>
+                              <p><b>Last Name:</b><span>${user.lastName}</span></p><br/>
+                              <p><b>Email:</b><span>${user.email}</span></p><br/>
+                              <p><b>Phone:</b><span>${user.phone}</span></p><br/>
+                    
+                              <button onclick="Update('${user._id}')" >Update</button>
+                              </div>
+                              <br/>  
+                        `
+            
+                    }
+                } catch (error) {
+                    
+                }
+                
 
 }
