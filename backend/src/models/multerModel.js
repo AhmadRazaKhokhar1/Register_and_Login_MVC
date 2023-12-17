@@ -10,7 +10,7 @@ const fileSchema = new mongoose.Schema({
     },
 });
 
-const fileModel = mongoose.model('File', fileSchema);
+const fileModel =new mongoose.model('File', fileSchema);
 
 const uri = process.env.MONGO_URI_TEST;
 mongoose.connect(uri);

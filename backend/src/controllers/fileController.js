@@ -1,6 +1,7 @@
 const fileModel =require("../models/multerModel.js");
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
+
 const fileController = {
 
    uploadFile:async(req, res)=> {
@@ -30,6 +31,18 @@ const fileController = {
         res.status(500).send({
             message:"There was an internal server Error"
         })
+    }
+   },
+ 
+   getFiles:async(req, res)=>{
+    try {
+        const data = await fileModel.find({});
+        res.status(200).send({
+            message:"Fetched Successfully!",
+            images:data,
+        })
+    } catch (error) {
+        console.log(` There was an error in fetching files controller: ${error}`)
     }
    }
 }
