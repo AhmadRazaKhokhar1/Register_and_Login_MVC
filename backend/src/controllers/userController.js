@@ -1,6 +1,7 @@
-const bcrypt = require('bcryptjs')
-const userClient = require('../Database/dataBase.js');
-const userModel = require('../models/userModel.js');
+import bcrypt from 'bcryptjs'
+import userClient from '../Database/dataBase.js'
+import userModel from '../models/userModel.js'
+import uploadOnCloudinary from '../Utils/cloudinary.js'
 
 const userController = {
 //registration mehtod or POST method 
@@ -13,16 +14,31 @@ registration :async(req, res)=>{
          res.status(409).json({message:'User already exists!'});
          return;
          }
+       const profileImageLocal = req.files?.profileImage[0]?.path;
+       const coverImageLocal = req.files?.coverImage[0]?.path;
        
-       const newData = new userModel({
+       if(!profileImageLocal){
+           return res.status(404).send({
+               success:false,
+               message:"Profile image is required"
+            })
+        }
+        
+        const profileImage = await uploadOnCloudinary(profileImageLocal);
+        const coverImage = await uploadOnCloudinary(coverImageLocal);
+        
+            const newData = new userModel({
+                
+                firstName:req.body.firstName,
+                lastName:req.body.lastName,
+                email:req.body.email.toLowerCase(),
+                phone:req.body.phone,
+                password:req.body.password,
+                profileImage:profileImage.url,  
+                coverImage: coverImage?.url || "",
+                
+            });
 
-        firstName:req.body.firstName,
-        lastName:req.body.lastName,
-        email:req.body.email,
-        phone:req.body.phone,
-        password:req.body.password,
-
-       });
          const token = await newData.generateToken();
        const result = await newData.save()
        console.log('Success');
@@ -131,4 +147,4 @@ deleteUser:async(req, res)=>{
 
 }
 
-module.exports = userController;
+export default userController;

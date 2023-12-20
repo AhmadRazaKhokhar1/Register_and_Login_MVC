@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./backend/src/server.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "nodemon  ./backend/src/server.js",
     "start": "nodemon ./backend/src/server.js"
@@ -11,7 +11,6 @@
   "author": "Ahmad Raza Khokhar",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-inzi": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.1",
     "cors": "^2.8.5",

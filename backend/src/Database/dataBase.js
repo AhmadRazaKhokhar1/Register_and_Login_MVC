@@ -1,6 +1,7 @@
-const {connect} = require('http2');
-const {MongoClient, ServerApiVersion} = require('mongodb');
-const mongoose = require('mongoose');
+import {MongoClient, ServerApiVersion} from 'mongodb';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
 const uri = process.env.MONGO_URI_TEST;
 
 const userClient = new MongoClient(uri, {
@@ -17,4 +18,4 @@ function run(){
 }
 run()
 
-module.exports = userClient;
+export default userClient;
