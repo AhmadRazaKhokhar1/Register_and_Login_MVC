@@ -3,6 +3,7 @@ import userController from '../controllers/userController.js';
 import { uploadFields } from '../Middlewares/multerMiddleWare.js';
 import jwtVerified from '../Middlewares/authMiddleWare.js';
 
+
 const userRouter = express.Router();
 
 userRouter.post('/register', uploadFields, userController.registration);
@@ -13,3 +14,4 @@ userRouter.put('/userdata/:id',jwtVerified, userController.updateUser);
 userRouter.delete('/userdata/:id',jwtVerified, userController.deleteUser);
 
 export default userRouter;
+
