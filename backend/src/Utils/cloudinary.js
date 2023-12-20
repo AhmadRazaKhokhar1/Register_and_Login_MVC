@@ -18,9 +18,11 @@ cloudinary.config({
       })
       console.log(`file has been uploaded successfully: ${response.url}`);
       //return the response to client
-      return response;
+      setTimeout(function(){ fs.unlinkSync(localFilePath);},7000)
+      return response.url;
 
     } catch (error) {
+      console.log(`Cloudinary Error:`,error)
       fs.unlinkSync(localFilePath);
       return null;
     }
