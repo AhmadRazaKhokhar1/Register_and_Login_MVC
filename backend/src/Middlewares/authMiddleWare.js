@@ -12,7 +12,6 @@ const token = req.header('Authorization');
         const jwtToken = token.replace('Bearer', "").trim()
 
        const isVerifiedUser = jwt.verify(jwtToken, process.env.SECRET_KEY);
-       console.log(isVerifiedUser);
        const userData = await userModel.findOne({email:isVerifiedUser.email}).select({password:0}); // deselect the password
 
        req.user = userData;
