@@ -22,7 +22,6 @@ app.use('/uploads', express.static('uploads'));
 
 //routes
 app.use('/api', userRouter);
-app.use('/api', fileRouter);
 
 app.listen(port, ()=>{
     console.log(`The app is listening at the PORT: ${port}🔥`)

@@ -2,11 +2,11 @@
   "name": "registration-app",
   "version": "1.0.0",
   "description": "",
-  "main": "./backend/src/server.js",
+  "main": "./backend/src/server.mjs",
   "type": "module",
   "scripts": {
-    "dev": "nodemon  ./backend/src/server.js",
-    "start": "nodemon ./backend/src/server.js"
+    "dev": "nodemon  ./backend/src/server.mjs",
+    "start": "nodemon ./backend/src/server.mjs"
   },
   "author": "Ahmad Raza Khokhar",
   "license": "ISC",

@@ -34,11 +34,11 @@ const userSchema = new mongoose.Schema({
         require:true,
     },
     profileImage:{
-        type:Buffer,
+        type:String,
         require:true,
     },
     coverImage:{
-        type:Buffer,
+        type:String,
         require:false,
     },
  });

@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const storage = multer.diskStorage({
   destination:(req, file, cb)=>{
-    const uploadPath = '../../Public/images';
+    const uploadPath = 'C:/Users/USER/Desktop/Arfa Tower Nexskill Projects/registration-app/backend/Public/images';
     cb(null, uploadPath);
     //if the folder does'nt exist then make it
     fs.mkdirSync(uploadPath, {recursive:true});

@@ -8,7 +8,7 @@ userRouter.post('/register', uploadFields, userController.registration);
 userRouter.post('/login', userController.login);
 userRouter.get('/data', userController.data);
 userRouter.get('/userdata/:id', userController.getUser);
-userRouter.put('/updateuser/:id', userController.updateUser);
-userRouter.delete('/deleteuser/:id', userController.deleteUser);
+userRouter.put('/userdata/:id', userController.updateUser);
+userRouter.delete('/userdata/:id', userController.deleteUser);
 
 export default userRouter;

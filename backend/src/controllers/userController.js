@@ -4,7 +4,7 @@ import userModel from '../models/userModel.js'
 import uploadOnCloudinary from '../Utils/cloudinary.js'
 
 const userController = {
-//registration mehtod or POST method 
+//registration mehtod 
 registration :async(req, res)=>{
     try {
        await userClient.connect();
@@ -14,24 +14,26 @@ registration :async(req, res)=>{
          res.status(409).json({message:'User already exists!'});
          return;
          }
+        // requesting files and their paths
        const profileImageLocal = req.files?.profileImage[0]?.path;
        const coverImageLocal = req.files?.coverImage[0]?.path;
-       
-       if(!profileImageLocal){
-           return res.status(404).send({
-               success:false,
-               message:"Profile image is required"
-            })
-        }
-        
+        console.log({profileImageLocal, coverImageLocal})
+       //uploading on cloudinary
         const profileImage = await uploadOnCloudinary(profileImageLocal);
         const coverImage = await uploadOnCloudinary(coverImageLocal);
-        
+         if(!profileImage){
+            res.status(400).send({
+                success:false,
+                message:"Profile image is required"
+            })
+        }
+        console.log({profileImage:profileImage, coverImage:coverImage});
+
             const newData = new userModel({
                 
                 firstName:req.body.firstName,
                 lastName:req.body.lastName,
-                email:req.body.email.toLowerCase(),
+                email:req.body.email,
                 phone:req.body.phone,
                 password:req.body.password,
                 profileImage:profileImage.url,  
