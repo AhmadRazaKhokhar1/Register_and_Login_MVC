@@ -46,7 +46,7 @@ registration :async(req, res)=>{
        return res.status(201).json({message:'User registered successfully!', result:result});
     } catch (error) {
         console.log(`There was an error in Registeration: ${error}`);
-       return res.status(500).json({error:'There was an internal server ERROR: 500'});
+       return res.status(500).json({message:'There was an internal server message: 500'});
     } finally{
         await userClient.close();
     }
@@ -79,7 +79,7 @@ login : async (req, res)=>{
             }
     } catch (error) {
         console.log(`There was an error while logging in! : ${error}`);
-        res.status(500).json({error:'There was an internal serverERROR:500'});
+        res.status(500).json({message:'There was an internal servermessage:500'});
     } 
     finally{
         await userClient.close();
@@ -93,7 +93,7 @@ login : async (req, res)=>{
         res.status(200).json({dataFetched:dataFetched});
     } catch (error) {
         console.log(`There was an error in Fetching Data: ${error}`);
-        res.status(500).json({error:'There was an internal server <b>ERROR: 500</b>'});
+        res.status(500).json({message:'There was an internal server <b>message: 500</b>'});
     } finally{
         userClient.close();
     }
@@ -103,46 +103,51 @@ login : async (req, res)=>{
      try {
         await userClient.connect();
         const userDataAccess = req.user;
-        const userId = userDataAccess._id;
+        // const userId = userDataAccess._id;
     
-        res.status(302).json({ userDataAccess:userDataAccess})
+        res.status(302).json({ sucess:true, userDataAccess:userDataAccess})
      } catch (error) {
         console.log(`There was as an internal server error ${error}`);
-        res.status(500).json({error:"Internal Server Error"})
+        res.status(500).json({message:"Internal Server Error"})
      }
   },
   // update user by his id and $set to change his info || Put or Patch and even Post Method can be used but PUT is preferred
   updateUser:async(req, res)=>{
     try {
         await userClient.connect();
-        const userId = req.params.id;
+        const user = req.user;
+        if(!user){
+           return res.status(401).send({success:false, message:"Unauthorized "})
+        }
+        const userId = user._id;
         const updatedUserData = req.body;
         const userData = await userModel.findOneAndUpdate({_id:userId}, {$set:updatedUserData}, {new:true});
         if(!updatedUserData){
             res.status(404).json({message:"User not found!"});
         }
         else{
-            res.status(302).json({error:"Updated successfully", userData})
+            res.status(302).json({message:"Updated successfully", userData})
         }
     } catch (error) {
         console.log(`There is an error at ${error}`);
-        res.status(500).json({error:"Internal Server Error"});
+        res.status(500).json({message:"Internal Server Error"});
     }
 },
 // delete user by targeting his unique id and DELETE Method
 deleteUser:async(req, res)=>{
     try {
         await userClient.connect();
-        const userId = req.params.id;
+        const user = req.user;
+        const userId = user._id;
         const userDeleted = await userModel.findOneAndDelete({_id:userId});
         if(userDeleted){
             res.status(200).json({message:"User Deleted successfully!", userDeleted:userDeleted})
         }else{
-            res.status(404).json({error:"User not found!"});
+            res.status(404).json({message:"User not found!"});
         }
     }catch(error){
-        console.log('There was an error:'+ error);
-        res.status(500).json({error:"There was an internal server error."})
+        console.log('There was an message:'+ error);
+        res.status(500).json({message:"There was an internal server error."})
     }
   }
 

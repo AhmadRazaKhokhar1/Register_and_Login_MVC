@@ -6,7 +6,7 @@ const token = req.header('Authorization');
     try {
         if(!token){
             return res.status(401).send({
-                success:false, message:"Your login session has expired please login"
+                success:false, message:"Your login session has expired"
             })
         }
         const jwtToken = token.replace('Bearer', "").trim()

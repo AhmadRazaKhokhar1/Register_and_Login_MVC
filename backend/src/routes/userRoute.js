@@ -9,7 +9,7 @@ userRouter.post('/register', uploadFields, userController.registration);
 userRouter.post('/login', userController.login);
 userRouter.get('/data', userController.data);
 userRouter.get('/userdata/:id',jwtVerified , userController.getUser);
-userRouter.put('/userdata/:id', userController.updateUser);
-userRouter.delete('/userdata/:id', userController.deleteUser);
+userRouter.put('/userdata/:id',jwtVerified, userController.updateUser);
+userRouter.delete('/userdata/:id',jwtVerified, userController.deleteUser);
 
 export default userRouter;
