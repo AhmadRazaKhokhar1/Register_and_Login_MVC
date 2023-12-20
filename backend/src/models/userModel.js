@@ -35,15 +35,13 @@ const userSchema = new mongoose.Schema({
     },
     profileImage:{
         type:String,
-        require:true,
     },
     coverImage:{
         type:String,
-        require:false,
     },
  });
 
- userSchema.methods.generateToken = async ()=>{
+ userSchema.methods.generateToken = async function(){
    const token =  await jwt.sign({
         email: this.email,
         id : this._id,
@@ -64,5 +62,5 @@ userSchema.pre('save', async function(){
     this.password = hashedPass;
    
 })
-const userModel = new mongoose.model('Users_demo_data_for_testing', userSchema);
+const userModel = new mongoose.model('cloudinary_data', userSchema);
 export default userModel;

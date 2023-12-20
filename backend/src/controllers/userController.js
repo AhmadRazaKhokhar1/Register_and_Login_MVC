@@ -17,17 +17,19 @@ registration :async(req, res)=>{
         // requesting files and their paths
        const profileImageLocal = req.files?.profileImage[0]?.path;
        const coverImageLocal = req.files?.coverImage[0]?.path;
-        console.log({profileImageLocal, coverImageLocal})
+       console.log({bodyFiles:req.files})
        //uploading on cloudinary
         const profileImage = await uploadOnCloudinary(profileImageLocal);
         const coverImage = await uploadOnCloudinary(coverImageLocal);
+        console.log("Profile Image URL:", profileImage.url);
+        console.log("Cover Image URL:", coverImage.url);
+   
          if(!profileImage){
             res.status(400).send({
                 success:false,
                 message:"Profile image is required"
             })
         }
-        console.log({profileImage:profileImage, coverImage:coverImage});
 
             const newData = new userModel({
                 
@@ -40,7 +42,7 @@ registration :async(req, res)=>{
                 coverImage: coverImage?.url || "",
                 
             });
-
+            console.log({newData, body:req.body})
          const token = await newData.generateToken();
        const result = await newData.save()
        console.log('Success');
