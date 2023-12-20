@@ -14,15 +14,14 @@ registration :async(req, res)=>{
          res.status(409).json({message:'User already exists!'});
          return;
          }
+         
         // requesting files and their paths
        const profileImageLocal = req.files?.profileImage[0]?.path;
        const coverImageLocal = req.files?.coverImage[0]?.path;
-       console.log({bodyFiles:req.files})
+
        //uploading on cloudinary
         const profileImage = await uploadOnCloudinary(profileImageLocal);
         const coverImage = await uploadOnCloudinary(coverImageLocal);
-        console.log("Profile Image URL:", profileImage.url);
-        console.log("Cover Image URL:", coverImage.url);
    
          if(!profileImage){
             res.status(400).send({
@@ -42,11 +41,10 @@ registration :async(req, res)=>{
                 coverImage: coverImage?.url || "",
                 
             });
-            console.log({newData, body:req.body})
          const token = await newData.generateToken();
        const result = await newData.save()
        console.log('Success');
-       return res.status(201).json({message:'User registered successfully!', result:result, token:token});
+       return res.status(201).json({message:'User registered successfully!', result:result, token:token, });
     } catch (error) {
         console.log(`There was an error in Registeration: ${error}`);
        return res.status(500).json({error:'There was an internal server ERROR: 500'});
