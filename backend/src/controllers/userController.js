@@ -41,10 +41,9 @@ registration :async(req, res)=>{
                 coverImage: coverImage?.url || "",
                 
             });
-         const token = await newData.generateToken();
        const result = await newData.save()
        console.log('Success');
-       return res.status(201).json({message:'User registered successfully!', result:result, token:token, });
+       return res.status(201).json({message:'User registered successfully!', result:result});
     } catch (error) {
         console.log(`There was an error in Registeration: ${error}`);
        return res.status(500).json({error:'There was an internal server ERROR: 500'});
@@ -103,10 +102,10 @@ login : async (req, res)=>{
   getUser:async(req, res)=>{
      try {
         await userClient.connect();
-        const userId = req.params.id
+        const userDataAccess = req.user;
+        const userId = userDataAccess._id;
     
-        const userData = await userModel.findOne({_id:userId});
-        res.status(302).json({userData:userData})
+        res.status(302).json({ userDataAccess:userDataAccess})
      } catch (error) {
         console.log(`There was as an internal server error ${error}`);
         res.status(500).json({error:"Internal Server Error"})
